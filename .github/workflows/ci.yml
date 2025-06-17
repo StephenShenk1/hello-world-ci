@@ -22,13 +22,17 @@ jobs:
           echo "Hello London" > output.txt
           chmod +x test.sh
 
-      - name: Build (Simulated)
-        run: echo "Building the Hello World app..."
-
-      - name: Lint shell script
+      - name: Install ShellCheck
         run: |
-          sudo apt-get install -y shellcheck || true
-          shellcheck test.sh
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get update
+            sudo apt-get install -y shellcheck
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+            brew install shellcheck
+          fi
+
+      - name: Run Lint with ShellCheck
+        run: shellcheck test.sh
 
       - name: Run Tests
         run: bash test.sh
