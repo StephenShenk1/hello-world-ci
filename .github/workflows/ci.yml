@@ -1,20 +1,40 @@
-# .github/workflows/ci.yml
-name: Hello World CI
+name: CI Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Set up environment
+        run: |
+          echo "Hello London" > output.txt
+          chmod +x test.sh
 
-      - name: Run Hello World
-        run: node index.js
+      - name: Build (Simulated)
+        run: echo "Building the Hello World app..."
+
+      - name: Lint shell script
+        run: |
+          sudo apt-get install -y shellcheck || true
+          shellcheck test.sh
+
+      - name: Run Tests
+        run: bash test.sh
+
+      - name: Upload output.txt as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-file
+          path: output.txt
