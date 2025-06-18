@@ -13,8 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Debug - Show username (for test only)
-        run: echo "Username: ${{ secrets.DOCKER_USERNAME }}"
+      - name: Debug - Show Docker Username (for test only)
+        run: |
+          echo "Username: ${{ secrets.DOCKER_USERNAME }}"
 
       - name: Docker Login
         uses: docker/login-action@v3
