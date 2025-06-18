@@ -10,14 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Debug - Show Docker Username (for test only)
-        run: |
-          echo "Username: ${{ secrets.DOCKER_USERNAME }}"
-
-      - name: Docker Login
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
