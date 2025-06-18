@@ -1,9 +1,11 @@
 #!/bin/bash
-# test.sh - Simple test for output file content
 
-if grep -q "Hello London" output.txt; then
-  echo "✅ Test passed: Found 'Hello London'"
+OUTPUT=$(node index.js)
+
+if [[ "$OUTPUT" == *"Hello World"* ]]; then
+  echo "✅ Test passed!"
+  exit 0
 else
-  echo "❌ Test failed: 'Hello London' not found"
+  echo "❌ Test failed!"
   exit 1
 fi
