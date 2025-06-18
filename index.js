@@ -1,2 +1,1 @@
-console.log("Hello, World!");
-console.log("Hello, Kingston!");
+console.log("Hello World from GitHub Actions!");
