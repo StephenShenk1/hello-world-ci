@@ -1,0 +1,11 @@
+{
+  "name": "hello-world-ci",
+  "version": "1.0.0",
+  "description": "GitHub Actions Hello World CI",
+  "main": "index.js",
+  "scripts": {
+    "test": "bash test.sh"
+  },
+  "author": "Stephen Shenk",
+  "license": "ISC"
+}
